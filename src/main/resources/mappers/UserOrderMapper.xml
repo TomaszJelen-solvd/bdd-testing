@@ -1,0 +1,27 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.solvd.bdd_automation.myBatis.iMappers.IMapperUserOrderItem">
+    <resultMap id="result" type="com.solvd.bdd_automation.myBatis.model.UserOrderItem">
+        <result column="users_id" jdbcType="BIGINT" property="userId" />
+        <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    </resultMap>
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.solvd.bdd_automation.myBatis.model.UserOrderItem">
+        INSERT INTO user_orders (users_id, product_name) VALUES (#{userId}, #{productName})
+    </insert>
+    <update id="change" parameterType="com.solvd.bdd_automation.myBatis.model.UserOrderItem">
+        UPDATE user_orders SET users_id = #{userId}, product_name = #{productName} WHERE id = #{id}
+    </update>
+    <select id="readAll" resultMap="result">
+        SELECT * FROM user_orders
+    </select>
+    <select id="read" parameterType="long" resultMap="result">
+        SELECT * FROM user_orders WHERE id = #{id}
+    </select>
+    <select id="readByUser" parameterType="long" resultMap="result">
+        SELECT * FROM user_orders WHERE users_id = #{userId}
+    </select>
+    <delete id="remove" parameterType="long">
+        DELETE FROM user_orders WHERE id = #{id}
+    </delete>
+</mapper>
